@@ -1,0 +1,64 @@
+<br>
+<div class="callout">
+  <div class="grid-container">
+    <h4>Сортировать по: </h4>
+    <div class="grid-x grid-margin-x">
+    <div class="cell shrink">
+      <span class="label">id</span>
+    </div>
+      <div class="cell small-1">
+        <div class="button-group">
+          <button class="button small" (click)="sortIdUp()">^</button>
+          <button class="button small" (click)="sortIdDown()">v</button>
+        </div>
+      </div>
+    <div class="cell shrink">
+      <span class="label">Цене</span>
+    </div>
+      <div class="cell small-1">
+        <div class="button-group">
+          <button class="button small" (click)="sortPriceUp()">^</button>
+          <button class="button small" (click)="sortPriceDown()">v</button>
+        </div>
+      </div>
+      <div class="cell shrink">
+        <span class="label">Количеству заказов</span>
+      </div>
+      <div class="cell small-1">
+        <div class="button-group">
+          <button class="button small" (click)="sortOrdersUp()">^</button>
+          <button class="button small" (click)="sortOrdersDown()">v</button>
+        </div>
+      </div>
+    </div>
+    <h4>Фильтровать по: </h4>
+    <div class="grid-x grid-padding-x">
+      <div class="cell medium-3">
+        <label>
+          Названию
+          <input type="text" [(ngModel)]="filterTitle">
+        </label>
+      </div>
+      <div class="cell medium-3">
+        <label>
+          Артикулу
+          <input type="text" [(ngModel)]="filterArticle">
+        </label>
+      </div>
+      <div class="cell medium-3">
+        <label>
+          Производителю
+          <input type="text" [(ngModel)]="filterManufact">
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="grid-container">
+  <app-phone-view *ngFor="let phone of phonesService.phones | sortPhones:sortType:sortOrder | filterPhonesTitles:filterTitle | filterPhonesArticle:filterArticle | filterPhonesManufact:filterManufact"
+                 [inPhone]="phone"
+                 (delPhone)="phonesService.on_del_phone($event)" >
+  </app-phone-view>
+</div>
+
